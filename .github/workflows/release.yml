@@ -27,8 +27,9 @@ jobs:
         with:
           pifile: rhasspy.Pifile
 
-      - name: Upload artifacts  
-        uses: actions/upload-artifact@v2
+      - name: Publish binaries  
+        uses: skx/github-action-publish-binaries@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: ${{ github.workflow }}-${{ github.event.release.tag_name }}.zip
-          path: rhasspy.img
+          args: 'rhasspy.img'
