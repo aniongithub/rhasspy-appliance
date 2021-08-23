@@ -1,0 +1,11 @@
+# assuming you have only one non-system user
+homeassistant:
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.68.0/24
+        - 127.0.0.1
+        - ::1
+      allow_bypass_login: true
+http:

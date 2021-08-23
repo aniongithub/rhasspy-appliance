@@ -1,0 +1,22 @@
+version: "3"
+services:
+  nodered:
+    image: nodered/node-red
+    network_mode: host
+    environment:
+      TZ: "America/Los_Angeles"
+    volumes:
+      - /home/pi/.config/node-red:/data
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/TZ:/etc/timezone:ro
+      - /usr/share/zoneinfo:/usr/share/zoneinfo:ro
+  rhasspy:
+    depends_on:
+      - nodered
+    image: rhasspy/rhasspy
+    network_mode: host
+    volumes:
+      - /home/pi/.config/rhasspy/profiles:/rhasspy/profiles
+    devices:
+      - /dev/snd:/dev/snd
+    entrypoint: ["/usr/lib/rhasspy/bin/rhasspy-voltron", "--user-profiles", "/rhasspy/profiles", "--profile", "en"]

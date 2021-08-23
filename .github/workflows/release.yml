@@ -18,17 +18,17 @@ jobs:
       - name: Write secrets.env
         env:
           SECRETS: ${{ secrets.SECRETS_ENV }}
-          PIFILE: bootstrap.Pifile
+          PIFILE: rhasspy.Pifile
         run: |
           echo $SECRETS > $(dirname $PIFILE)/secrets.env
 
       - name: Build image
         uses: Nature40/pimod@v0.2.2
         with:
-          pifile: bootstrap.Pifile
+          pifile: rhasspy.Pifile
 
       - name: Upload artifacts  
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.workflow }}-${{ github.event.release.tag_name }}.zip
-          path: bootstrap.img
+          path: rhasspy.img

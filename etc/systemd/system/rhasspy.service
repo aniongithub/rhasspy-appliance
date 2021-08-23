@@ -1,0 +1,16 @@
+[Unit]
+Description=Rhasspy
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=forking
+ExecStart=/etc/rhasspy/bootstrap.sh --start
+ExecStop=/etc/rhasspy/bootstrap.sh --stop
+Restart=on-failure
+RestartSec=5s
+User=root
+TimeoutSec=900
+
+[Install]
+WantedBy=sysinit.target

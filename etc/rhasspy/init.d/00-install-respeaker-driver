@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if ! lsmod | grep seeed; then
+    echo "Installing seeed-voicecard driver..."
+    export LC_ALL=C.UTF-8
+    cd /usr/local/src
+    git clone https://github.com/HinTak/seeed-voicecard.git
+    cd seeed-voicecard
+    ./install.sh
+    reboot --force
+else
+    echo "seeed-voicecard driver installed, continuing..."
+fi

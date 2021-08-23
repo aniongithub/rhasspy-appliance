@@ -1,0 +1,2 @@
+#!/bin/bash
+docker-compose -f ${SCRIPT_DIR}/docker-compose.yaml down

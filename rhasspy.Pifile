@@ -22,3 +22,21 @@ source modules/timezone.Pifile
 # Note: all 3 vars need to be set, otherwise wpa_supplicant.conf will not be generated
 # and Wi-Fi will be blocked with rfkill
 source modules/wifi.Pifile
+
+# Increase side of our image to accomodate installs
+PUMP 500M
+
+# Set up docker and docker-compose
+source modules/docker.Pifile
+
+# Install Rhasspy and Node-RED as a docker-compose file managed by a systemd unit
+INSTALL etc /etc
+RUN systemctl enable rhasspy.service
+
+# Create empty config dirs accessible to the pi user
+RUN install -d -m 0755 -o pi \
+    /home/pi/.config/ \
+    /home/pi/.config/rhasspy \
+    /home/pi/.config/rhasspy/profiles \
+    /home/pi/.config/rhasspy/profiles/en
+RUN install -d -m 0755 -o pi /home/pi/.config /home/pi/.config/node-red
