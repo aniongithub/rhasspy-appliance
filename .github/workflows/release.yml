@@ -26,6 +26,10 @@ jobs:
         uses: Nature40/pimod@v0.2.2
         with:
           pifile: rhasspy.Pifile
+          
+      - name: Make tarball
+        run: |
+          tar -czvf bootstrap.tar.gz bootstrap.img
 
       - name: Publish binaries  
         uses: skx/github-action-publish-binaries@master
